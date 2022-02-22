@@ -1,0 +1,22 @@
+{
+    "subscriptions":{
+        "ID":"",
+        "BillingProfileID":"",
+        "BillingAccountID":"",
+        "App":{
+            "ApplicationID":"",
+            "TenantID":"",
+            "secret":""
+        },
+        "StorageAccount":{
+            "monitoredblob":"?<string>",
+            "secondblobfortest":"?<string>"
+        }
+    },
+
+    "elasticAPI":{
+        "endpoint":"",
+        "key":"",
+        "engine-name":""
+    }
+}
