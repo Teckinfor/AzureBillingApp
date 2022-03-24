@@ -10,18 +10,20 @@ def get_each_VM_price_per_day(file:dict):
             list_day[date] = {}
 
         if "virtualMachines" in item["properties"]["instanceName"] :
-            name = re.search(r'Machines\/([a-zA-Z0-9]{1,255})', item["properties"]["instanceName"])
-            if name.group(1).lower() in list_day[date].keys():
-                list_day[date][name.group(1).lower()] += item["properties"]["costInBillingCurrency"]
+            name = re.search(r'Machines\/([a-zA-Z0-9-]{1,255})', item["properties"]["instanceName"])
+            namefinal = name.group(1).lower().replace("-", "_")
+            if namefinal in list_day[date].keys():
+                list_day[date][namefinal] += item["properties"]["costInBillingCurrency"]
             else :
-                list_day[date][name.group(1).lower()] = item["properties"]["costInBillingCurrency"]
+                list_day[date][namefinal] = item["properties"]["costInBillingCurrency"]
                 
         elif "Microsoft.Compute/disks/" in item["properties"]["instanceName"] :
-            name = re.search(r'disks/([a-zA-Z0-9]{1,255})', item["properties"]["instanceName"])
-            if name.group(1).lower() in list_day[date].keys():
-                list_day[date][name.group(1).lower()] += item["properties"]["costInBillingCurrency"]
+            name = re.search(r'disks/([a-zA-Z0-9-]{1,255})', item["properties"]["instanceName"])
+            namefinal = name.group(1).lower().replace("-", "_")
+            if namefinal in list_day[date].keys():
+                list_day[date][namefinal] += item["properties"]["costInBillingCurrency"]
             else :
-                list_day[date][name.group(1).lower()] = item["properties"]["costInBillingCurrency"]
+                list_day[date][namefinal] = item["properties"]["costInBillingCurrency"]
 
     for day in list_day.values():
         for vm in day.keys() :
@@ -91,11 +93,12 @@ def get_each_container_price_per_day(file:dict):
             list_day[date] = {}
 
         if "containerGroups" in item["properties"]["instanceName"] :
-            name = re.search(r'containerGroups\/([a-zA-Z0-9]{1,255})', item["properties"]["instanceName"])
-            if name.group(1).lower() in list_day[date].keys():
-                list_day[date][name.group(1).lower()] += item["properties"]["costInBillingCurrency"]
+            name = re.search(r'containerGroups\/([a-zA-Z0-9-]{1,255})', item["properties"]["instanceName"])
+            namefinal = name.group(1).lower().replace("-", "_")
+            if namefinal in list_day[date].keys():
+                list_day[date][namefinal] += item["properties"]["costInBillingCurrency"]
             else :
-                list_day[date][name.group(1).lower()] = item["properties"]["costInBillingCurrency"]
+                list_day[date][namefinal] = item["properties"]["costInBillingCurrency"]
 
     for day in list_day.values():
         for vm in day.keys() :
@@ -141,11 +144,12 @@ def get_each_eventhub_per_day(file:dict):
             list_day[date] = {}
 
         if "EventHub" in item["properties"]["instanceName"] :
-            name = re.search(r'EventHub\/namespaces\/([a-zA-Z0-9]{1,255})', item["properties"]["instanceName"])
-            if name.group(1).lower() in list_day[date].keys():
-                list_day[date][name.group(1).lower()] += item["properties"]["costInBillingCurrency"]
+            name = re.search(r'EventHub\/namespaces\/([a-zA-Z0-9-]{1,255})', item["properties"]["instanceName"])
+            namefinal = name.group(1).lower().replace("-", "_")
+            if namefinal in list_day[date].keys():
+                list_day[date][namefinal] += item["properties"]["costInBillingCurrency"]
             else :
-                list_day[date][name.group(1).lower()] = item["properties"]["costInBillingCurrency"]
+                list_day[date][namefinal] = item["properties"]["costInBillingCurrency"]
 
     for day in list_day.values():
         for eventhub in day.keys() :
