@@ -7,12 +7,6 @@ from files.sorter import *
 from time import sleep
 import json, sys, os , re
 
-def check_configuration () :
-    file = open("config.json")
-    config = json.load(file)
-    file.close()
-    return config  
-
 def generate_config () :
     config =   {
                     "subscriptions":{
@@ -36,13 +30,9 @@ def generate_config () :
     return config
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
 
-    if len(sys.argv) > 1 :
-        config = generate_config()
-
-    else :
-        config = check_configuration()
+    config = generate_config()
 
     while(True):
 
@@ -79,11 +69,3 @@ if __name__ == "__main__" :
 
         except :
             continue
-
-    
-    # token = get_authorization(config)
-    # bill = get_details_bill(config, token)
-    # json_object = json.dumps(bill, indent = 4)
-
-    # with open("sample.json", "w") as outfile:
-    #     outfile.write(json_object)
