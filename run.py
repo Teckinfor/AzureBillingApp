@@ -1,5 +1,5 @@
 #######################################
-############ Version 1.4.2 ############
+############ Version 1.5.2 ############
 ##### Please, read the README.md ######
 #######################################
 
@@ -18,8 +18,6 @@ def generate_config () :
     config =   {
                     "subscriptions":{
                         "ID":os.getenv("SubscriptionID"),
-                        "BillingProfileID":os.getenv("BillingProfileID"),
-                        "BillingAccountID":os.getenv("BillingAccountID"),
                         "App":{
                             "ApplicationID":os.getenv("ApplicationID"),
                             "TenantID":os.getenv("TenantID"),
@@ -52,25 +50,25 @@ if __name__ == "__main__" :
         
             if token != NO_TOKEN :
             
-                # Get all bill informations
+                #Get all bill informations
                 bill = get_details_bill(config, token)
     
-                # VM billing
+                #VM billing
                 VM_doc = make_VM_final_document(bill)
     
-                # Blob stats and billing
+                #Blob stats and billing
                 Blob_doc = make_blob_final_document(bill)
     
-                # Container Instance billing
+                #Container Instance billing
                 Container_doc = make_container_final_document(bill)
     
-                # EventHub billing
+                #EventHub billing
                 EventHub_doc = make_eventhub_final_document(bill)
     
-                # Merge all documents
+                #Merge all documents
                 Resume_doc = merge_docs([VM_doc, Blob_doc, Container_doc, EventHub_doc])
     
-                # Send Data to elastic enterprise search
+                #Send Data to elastic enterprise search
                 try :
                     send_data_to_elasticsearch(config, config["elasticAPI"]["engine-name"], Resume_doc)
                 except :
@@ -78,13 +76,9 @@ if __name__ == "__main__" :
                 
                 sleep(3600) # 1h
 
+            json_object = json.dumps(Resume_doc, indent = 4)
+            with open("sample.json", "w") as outfile:
+                outfile.write(json_object)
+
         except :
             continue
-
-    
-    # token = get_authorization(config)
-    # bill = get_details_bill(config, token)
-    # json_object = json.dumps(bill, indent = 4)
-
-    # with open("sample.json", "w") as outfile:
-    #     outfile.write(json_object)
