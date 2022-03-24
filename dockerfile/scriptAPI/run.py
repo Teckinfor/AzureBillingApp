@@ -1,18 +1,12 @@
-#######################################
-############ Version 1.4.1 ############
-#######################################
-
 from files.apicalls import *
 from files.sorter import *
 from time import sleep
-import json, sys, os , re
+import os
 
 def generate_config () :
     config =   {
                     "subscriptions":{
                         "ID":os.getenv("SubscriptionID"),
-                        "BillingProfileID":os.getenv("BillingProfileID"),
-                        "BillingAccountID":os.getenv("BillingAccountID"),
                         "App":{
                             "ApplicationID":os.getenv("ApplicationID"),
                             "TenantID":os.getenv("TenantID"),
