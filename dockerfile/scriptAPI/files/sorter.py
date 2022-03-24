@@ -1,35 +1,4 @@
 import re
-
-def get_All_VM_price(file:dict):
-    price = 0
-    for item in file["value"] :
-        if "virtualMachines" in item["properties"]["instanceName"] :
-            price += item["properties"]["costInBillingCurrency"]
-        elif "Microsoft.Compute/disks/" in item["properties"]["instanceName"] :
-            price += item["properties"]["costInBillingCurrency"]
-    return round(price,2)
-
-def get_each_VM_price(file:dict):
-    list_vm = {}
-    for item in file["value"] :
-        if "virtualMachines" in item["properties"]["instanceName"] :
-            name = re.search(r'Machines\/([a-zA-Z0-9]{1,255})', item["properties"]["instanceName"])
-            if name.group(1).lower() in list_vm.keys():
-                list_vm[name.group(1).lower()] += item["properties"]["costInBillingCurrency"]
-            else :
-                list_vm[name.group(1).lower()] = item["properties"]["costInBillingCurrency"]
-                
-        elif "Microsoft.Compute/disks/" in item["properties"]["instanceName"] :
-            name = re.search(r'disks/([a-zA-Z0-9]{1,255})', item["properties"]["instanceName"])
-            if name.group(1).lower() in list_vm.keys():
-                list_vm[name.group(1).lower()] += item["properties"]["costInBillingCurrency"]
-            else :
-                list_vm[name.group(1).lower()] = item["properties"]["costInBillingCurrency"]
-
-    for vm in list_vm.keys():
-        list_vm[vm] = round(list_vm[vm],2)
-        
-    return list_vm
     
 def get_each_VM_price_per_day(file:dict):
     list_day = {}
