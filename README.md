@@ -13,8 +13,6 @@ There are 2 ways to configure the application:
    2. If you assign a parameter to the script, it will automatically load the configuration based on environment variables. Here is the list of the necessary environment variables:
 
         - SubscriptionID = Subscription id
-        - BillingProfileID = Billing Profile id
-        - BillingAccountID = Billing Account id
         - ApplicationID = Application id
         - TenantID = Tenant id
         - Appsecret = Application secret key
